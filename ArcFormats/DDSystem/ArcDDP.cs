@@ -102,7 +102,7 @@ namespace GameRes.Formats.DDSystem
                 }
                 else if (0 != signature)
                 {
-                    IResource res;
+                    Resource res;
                     if (0x020000 == signature || 0x0A0000 == signature)
                         res = ImageFormat.Tga;
                     else

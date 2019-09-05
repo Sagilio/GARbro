@@ -1416,7 +1416,7 @@ namespace GARbro.GUI
 
         private void OnParametersRequest (object sender, ParametersRequestEventArgs e)
         {
-            var format = sender as IResource;
+            var format = sender as Resource;
             if (null != format)
             {
                 var control = format.GetAccessWidget() as UIElement;
@@ -1547,6 +1547,8 @@ namespace GARbro.GUI
         public static readonly RoutedCommand RenameItem = new RoutedCommand();
         public static readonly RoutedCommand ExploreItem = new RoutedCommand();
         public static readonly RoutedCommand ConvertMedia = new RoutedCommand();
+        public static readonly RoutedCommand ExportMedia = new RoutedCommand();
+        public static readonly RoutedCommand PackMedia = new RoutedCommand();
         public static readonly RoutedCommand Refresh = new RoutedCommand();
         public static readonly RoutedCommand Browse = new RoutedCommand();
         public static readonly RoutedCommand FitWindow = new RoutedCommand();

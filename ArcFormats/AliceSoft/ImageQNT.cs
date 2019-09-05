@@ -50,6 +50,16 @@ namespace GameRes.Formats.AliceSoft
             throw new System.NotImplementedException ("QntFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {
             var header = stream.ReadHeader (0x30);

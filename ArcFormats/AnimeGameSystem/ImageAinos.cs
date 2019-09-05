@@ -50,6 +50,16 @@ namespace GameRes.Formats.Ags
             throw new System.NotImplementedException ("CgFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ImageMetaData ReadMetaData (IBinaryStream file)
         {
             int sig = file.ReadByte();

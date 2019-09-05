@@ -43,6 +43,15 @@ namespace GameRes.Formats.Misc
         public override string Description { get { return "LZSS-compressed bitmap"; } }
         public override uint     Signature { get { return 0x53535A4C; } } // 'LZSS'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream file)
         {

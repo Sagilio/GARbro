@@ -151,6 +151,15 @@ namespace GameRes.Formats.Hexenhaus
         public override string Description { get { return "WAG archive PNG image"; } }
         public override uint     Signature { get { return 0x44474D49; } } // 'IMGD'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public ImgdFormat ()
         {

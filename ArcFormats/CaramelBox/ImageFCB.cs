@@ -86,6 +86,16 @@ namespace GameRes.Formats.CaramelBox
             throw new System.NotImplementedException ("FcbFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         byte[] Unpack (byte[] input, ImageMetaData info)
         {
             byte[] ref_pixel = { 0x80, 0x80, 0x80, 0xFF };

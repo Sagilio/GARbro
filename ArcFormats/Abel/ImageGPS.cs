@@ -47,6 +47,15 @@ namespace GameRes.Formats.Abel
         public override string Description { get { return "ADVEngine compressed bitmap"; } }
         public override uint     Signature { get { return 0x535047; } } // 'GPS'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public GpsFormat ()
         {

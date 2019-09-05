@@ -113,7 +113,7 @@ namespace GameRes.Formats.Will
             foreach (var entry in dir.Where (e => string.IsNullOrEmpty (e.Type)))
             {
                 uint signature = file.View.ReadUInt32 (entry.Offset);
-                IResource res;
+                Resource res;
                 if ((signature & 0xFFFF) == 0x4342) // 'BC'
                     res = BcFormat.Value;
                 else

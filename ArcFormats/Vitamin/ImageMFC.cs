@@ -115,6 +115,16 @@ namespace GameRes.Formats.Vitamin
             throw new System.NotImplementedException ("MfcFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         void RleUnpack (Stream input, int input_size, byte[] output)
         {
             int dst = 0;

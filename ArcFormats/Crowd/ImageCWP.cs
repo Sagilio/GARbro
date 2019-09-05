@@ -40,6 +40,15 @@ namespace GameRes.Formats.Crowd
         public override string Description { get { return "Crowd engine image format"; } }
         public override uint     Signature { get { return 0x50445743; } } // 'CWDP'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public CwpFormat ()
         {

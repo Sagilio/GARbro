@@ -59,6 +59,16 @@ namespace GameRes.Formats.Saiki
             stream = new PrefixStream (header, stream);
             return new BinaryStream (stream, input.Name);
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -68,6 +78,15 @@ namespace GameRes.Formats.Saiki
         public override string Description { get { return "Obfuscated JPEG image"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public JpxFormat ()
         {
@@ -102,6 +121,15 @@ namespace GameRes.Formats.Saiki
         public override string Description { get { return "Obfuscated BMP image"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {

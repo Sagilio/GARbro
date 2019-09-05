@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GARbro.GUI</RootNamespace>
     <AssemblyName>GARbro.GUI</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -72,7 +72,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
@@ -94,7 +94,7 @@
       <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NAudio">
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -142,6 +142,9 @@
     <Compile Include="EnterMaskDialog.xaml.cs">
       <DependentUpon>EnterMaskDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExportMedia.xaml.cs">
+      <DependentUpon>ExportMedia.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExtractArchive.xaml.cs">
       <DependentUpon>ExtractArchive.xaml</DependentUpon>
     </Compile>
@@ -155,27 +158,30 @@
     <Compile Include="FileExistsDialog.xaml.cs">
       <DependentUpon>FileExistsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GarConvert.cs" />
-    <Compile Include="GarCreate.cs" />
-    <Compile Include="GarExtract.cs" />
-    <Compile Include="GarOperation.cs" />
-    <Compile Include="GarUpdate.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Operations\GarConvert.cs" />
+    <Compile Include="Operations\GarCreate.cs" />
+    <Compile Include="Operations\GarExport.cs" />
+    <Compile Include="Operations\GarExtract.cs" />
+    <Compile Include="Operations\GarOperation.cs" />
+    <Compile Include="Operations\GarPack.cs" />
+    <Compile Include="Operations\GarUpdate.cs" />
     <Compile Include="HistoryStack.cs" />
     <Compile Include="ImagePreview.cs" />
     <Compile Include="ListViewEx.cs" />
     <Compile Include="ModalWindow.cs" />
     <Compile Include="NAudio.cs" />
-    <Compile Include="ProgressDialog\IProgressDialog.cs" />
-    <Compile Include="ProgressDialog\ProgressDialog.cs">
+    <Compile Include="PackMedia.xaml.cs">
+      <DependentUpon>PackMedia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interop\IProgressDialog.cs" />
+    <Compile Include="Interop\ProgressDialog.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shell.cs" />
+    <Compile Include="Shell\Shell.cs" />
     <Compile Include="Strings\guiStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,6 +218,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ExportMedia.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ExtractArchive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,6 +250,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PackMedia.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -271,6 +285,7 @@
     <EmbeddedResource Include="Strings\guiStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>guiStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Strings\guiStrings.ru-RU.resx" />
     <EmbeddedResource Include="..\LICENSE" />
@@ -301,6 +316,10 @@
     <Resource Include="Images\search4files.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArcPacks\ArcFormats.Extension.csproj">
+      <Project>{0c9b7267-0080-4452-b8c5-0d480324fef4}</Project>
+      <Name>ArcPacks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameRes\GameRes.csproj">
       <Project>{453c087f-e416-4ae9-8c03-d8760da0574b}</Project>
       <Name>GameRes</Name>
@@ -336,6 +355,7 @@
   <ItemGroup>
     <Resource Include="Images\64x64\alert.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>perl "$(SolutionDir)inc-revision.pl" "$(ProjectPath)" $(ConfigurationName) "$(SolutionDir)\"
@@ -345,13 +365,6 @@ exit 0</PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

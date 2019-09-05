@@ -115,6 +115,16 @@ namespace GameRes.Formats.BRoom
             throw new System.NotImplementedException ("ErpFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         static readonly byte[,,] DefaultKey = new byte[3,3,31] {
             {
                 { 0x86, 0xBD, 0xAD, 0x4B, 0xBC, 0x1D, 0xAA, 0x4C, 0x23, 0xAB, 0x16, 0x8C, 0xE2, 0x29, 0x7F, 0xE1,

@@ -94,7 +94,7 @@ namespace GameRes.Formats.Yox
             {
                 file.Position = entry.Offset;
                 uint signature = ReadUInt32 (file);
-                IResource res = null;
+                Resource res = null;
                 if (0x584F59 == signature) // 'YOX'
                 {
                     if (0 != (2 & ReadUInt32 (file)))

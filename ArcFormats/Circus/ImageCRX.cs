@@ -84,6 +84,16 @@ namespace GameRes.Formats.Circus
             throw new NotImplementedException ("CrxFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         internal sealed class Reader : IDisposable
         {
             IBinaryStream   m_input;
@@ -276,7 +286,7 @@ namespace GameRes.Formats.Circus
                             case 2:
                                 src.Read (m_output, dst, pixel_size);
                                 for (int x = pixel_size; x < src_stride; ++x)
-                                    m_output[dst+x] = (byte)(src.ReadByte() + m_output[prev_row+x - pixel_size]);
+                                    m_output[dst+x] = (byte)(src.ReadByte() + m_output[prev_row + x - pixel_size]);
                                 break;
                             case 3:
                                 for (int x = src_stride - pixel_size; x > 0; --x)
@@ -294,7 +304,7 @@ namespace GameRes.Formats.Circus
                                         dst += pixel_size;
                                         if (0 == --w)
                                             break;
-                                        byte next = src.ReadByte();
+                                        byte next = src .ReadByte();
                                         if (val == next)
                                         {
                                             int count = src.ReadByte();

@@ -120,6 +120,16 @@ namespace GameRes.Formats.Ags32i
             throw new System.NotImplementedException ("GssFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         Stream OpenStream (IBinaryStream input, uint key)
         {
             var proxy = new ProxyStream (input.AsStream, true);

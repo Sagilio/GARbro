@@ -81,6 +81,16 @@ namespace GameRes.Formats.DarkNiteSystem
             throw new System.NotImplementedException ("YpFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         byte[] LzUnpack (IBinaryStream input, int unpacked_size)
         {
             var output = new byte[unpacked_size];

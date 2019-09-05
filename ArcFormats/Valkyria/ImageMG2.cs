@@ -144,6 +144,16 @@ namespace GameRes.Formats.Valkyria
         {
             throw new System.NotImplementedException ("Mg2Format.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal class Mg2EncryptedStream : StreamRegion

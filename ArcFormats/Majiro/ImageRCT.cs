@@ -66,6 +66,15 @@ namespace GameRes.Formats.Majiro
         public override string Description { get { return "Majiro game engine RGB image format"; } }
         public override uint     Signature { get { return 0x9a925a98; } }
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public RctFormat ()
         {

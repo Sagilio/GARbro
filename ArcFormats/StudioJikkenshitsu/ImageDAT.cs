@@ -115,6 +115,16 @@ namespace GameRes.Formats.Jikkenshitsu
             throw new System.NotImplementedException ("SpDatFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         SjSchemeMap DefaultScheme = new SjSchemeMap { KnownSchemes = new Dictionary<string, byte[]>() };
 
         public override ResourceScheme Scheme

@@ -1,13 +1,27 @@
-GARbro
+GARbro （Include Packs）
 ======
 
 Visual Novels resource browser.
 
-Requires .NET Framework v4.6 or newer (https://www.microsoft.com/net)
+It is modified from [GARbro](https://github.com/morkt/GARbro) .
+You can find the modification explanation below.
+
+
+Requires .NET Framework v4.8 or newer (https://www.microsoft.com/net)
 
 [Supported formats](https://morkt.github.io/GARbro/supported.html)
 
 [Download latest release](https://github.com/morkt/GARbro/releases)
+
+Modifications
+---------
+Update .NET Framework v4.6 => .NET Framework v4.8.
+
+Add feature packing some text and image format. 
+
+| Engine | Format |               
+| :----------:  | :--------: |
+|  Cirtus V2     |`bmp` => `crx` |
 
 Operation
 ---------

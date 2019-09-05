@@ -50,6 +50,15 @@ namespace GameRes.Formats.BlackRainbow
         public override string Description { get { return "Black Rainbow bitmap format"; } }
         public override uint     Signature { get { return 0x444d425fu; } } // '_BMD'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {

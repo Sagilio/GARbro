@@ -50,8 +50,8 @@ namespace GameRes
         private IEnumerable<ISettingsManager> m_settings_managers;
         #pragma warning restore 649
 
-        private MultiValueDictionary<string, IResource> m_extension_map = new MultiValueDictionary<string, IResource>();
-        private MultiValueDictionary<uint, IResource> m_signature_map = new MultiValueDictionary<uint, IResource>();
+        private MultiValueDictionary<string, Resource> m_extension_map = new MultiValueDictionary<string, Resource>();
+        private MultiValueDictionary<uint, Resource> m_signature_map = new MultiValueDictionary<uint, Resource>();
 
         private Dictionary<string, string> m_game_map = new Dictionary<string, string>();
 
@@ -63,11 +63,11 @@ namespace GameRes
         public IEnumerable<AudioFormat>   AudioFormats  { get { return m_audio_formats; } }
         public IEnumerable<ScriptFormat>  ScriptFormats { get { return m_script_formats; } }
 
-        public IEnumerable<IResource> Formats
+        public IEnumerable<Resource> Formats
         {
             get
             {
-                return ((IEnumerable<IResource>)ArcFormats).Concat (ImageFormats).Concat (AudioFormats).Concat (ScriptFormats);
+                return ((IEnumerable<Resource>)ArcFormats).Concat (ImageFormats).Concat (AudioFormats).Concat (ScriptFormats);
             }
         }
 
@@ -92,7 +92,7 @@ namespace GameRes
             //Adds all the parts found in the same assembly as the Program class
             catalog.Catalogs.Add (new AssemblyCatalog (typeof(FormatCatalog).Assembly));
             //Adds parts matching pattern found in the directory of the assembly
-            catalog.Catalogs.Add (new DirectoryCatalog (AssemblyLocation, "Arc*.dll"));
+            catalog.Catalogs.Add (new DirectoryCatalog (AssemblyLocation ?? throw new InvalidOperationException(), "Arc*.dll"));
 
             //Create the CompositionContainer with the parts in the catalog
             using (var container = new CompositionContainer (catalog))
@@ -112,7 +112,7 @@ namespace GameRes
             }
         }
 
-        private void AddResourceImpl (IEnumerable<IResource> formats, ICompositionService container)
+        private void AddResourceImpl (IEnumerable<Resource> formats, ICompositionService container)
         {
             foreach (var impl in formats)
             {
@@ -150,7 +150,7 @@ namespace GameRes
             foreach (var alias in provider.GetExports<ResourceAlias, IResourceAliasMetadata>())
             {
                 var metadata = alias.Metadata;
-                IEnumerable<IResource> target_list;
+                IEnumerable<Resource> target_list;
                 if (string.IsNullOrEmpty (metadata.Type))
                     target_list = Formats;
                 else if ("archive" == metadata.Type)
@@ -204,30 +204,30 @@ namespace GameRes
         /// Look up filename in format registry by filename extension and return corresponding interfaces.
         /// if no formats available, return empty range.
         /// </summary>
-        public IEnumerable<IResource> LookupFileName (string filename)
+        public IEnumerable<Resource> LookupFileName (string filename)
         {
             string ext = Path.GetExtension (filename);
             if (string.IsNullOrEmpty (ext))
-                return Enumerable.Empty<IResource>();
+                return Enumerable.Empty<Resource>();
             return LookupExtension (ext.TrimStart ('.'));
         }
 
-        public IEnumerable<IResource> LookupExtension (string ext)
+        public IEnumerable<Resource> LookupExtension (string ext)
         {
             return m_extension_map.GetValues (ext.ToUpperInvariant(), true);
         }
 
-        public IEnumerable<Type> LookupExtension<Type> (string ext) where Type : IResource
+        public IEnumerable<Type> LookupExtension<Type> (string ext) where Type : Resource
         {
             return LookupExtension (ext).OfType<Type>();
         }
 
-        public IEnumerable<IResource> LookupSignature (uint signature)
+        public IEnumerable<Resource> LookupSignature (uint signature)
         {
             return m_signature_map.GetValues (signature, true);
         }
 
-        public IEnumerable<Type> LookupSignature<Type> (uint signature) where Type : IResource
+        public IEnumerable<Type> LookupSignature<Type> (uint signature) where Type : Resource
         {
             return LookupSignature (signature).OfType<Type>();
         }
@@ -235,7 +235,7 @@ namespace GameRes
         /// <summary>
         /// Enumerate resources matching specified <paramref name="signature"/> and filename extension.
         /// </summary>
-        internal IEnumerable<ResourceType> FindFormats<ResourceType> (string filename, uint signature) where ResourceType : IResource
+        internal IEnumerable<ResourceType> FindFormats<ResourceType> (string filename, uint signature) where ResourceType : Resource
         {
             var ext = new Lazy<string> (() => Path.GetExtension (filename).TrimStart ('.').ToLowerInvariant(), false);
             var tried = Enumerable.Empty<ResourceType>();
@@ -414,7 +414,7 @@ namespace GameRes
     /// <summary>
     /// Lazily initialized wrapper for resource instances.
     /// </summary>
-    public class ResourceInstance<T> where T : IResource
+    public class ResourceInstance<T> where T : Resource
     {
         T           m_format;
         Func<T>     m_resolver;

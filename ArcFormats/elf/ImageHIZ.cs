@@ -96,6 +96,16 @@ namespace GameRes.Formats.Elf
         {
             throw new System.NotImplementedException ("HizFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -140,6 +150,11 @@ namespace GameRes.Formats.Elf
         public override void Write (Stream file, ImageData image)
         {
             throw new System.NotImplementedException ("HipFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
         }
     }
 }

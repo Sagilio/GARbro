@@ -77,6 +77,16 @@ namespace GameRes.Formats.Sceplayer
         {
             throw new System.NotImplementedException ("G24AFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -126,6 +136,16 @@ namespace GameRes.Formats.Sceplayer
         public override void Write (Stream file, ImageData image)
         {
             throw new System.NotImplementedException ("G2408BFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
         }
     }
 

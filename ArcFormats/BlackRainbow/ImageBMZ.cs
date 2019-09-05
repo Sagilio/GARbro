@@ -38,6 +38,15 @@ namespace GameRes.Formats.BlackRainbow
         public override string Description { get { return "Compressed bitmap format"; } }
         public override uint     Signature { get { return 0x33434c5au; } } // 'ZLC3'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override void Write (Stream file, ImageData image)
         {

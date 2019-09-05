@@ -48,6 +48,15 @@ namespace GameRes.Formats.Ikura
         public override string Description { get { return "Digital Romance System image format"; } }
         public override uint     Signature { get { return ~0x4c4c5546u; } } // 'FULL'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         static readonly byte[] DefaultKey = { 0x4D, 0x39, 0x38, 0x31, 0x31, 0x31, 0x33, 0x4D }; // "M981113M"
 
@@ -479,6 +488,16 @@ namespace GameRes.Formats.Ikura
         {
             throw new NotImplementedException ("DrgIndexedFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -503,6 +522,16 @@ namespace GameRes.Formats.Ikura
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("GgaFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)

@@ -83,6 +83,16 @@ namespace GameRes.Formats.Seraphim
         {
             throw new NotImplementedException ("SeraphCfImage.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -162,6 +172,16 @@ namespace GameRes.Formats.Seraphim
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("SeraphCbImage.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
     }
 

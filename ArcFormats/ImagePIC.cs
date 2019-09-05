@@ -36,6 +36,15 @@ namespace GameRes.Formats.Sprite
         public override string Description { get { return "Soft House Sprite bitmap format"; } }
         public override uint     Signature { get { return 0x434950; } } // 'PIC'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         const int HeaderSize = 10;
 

@@ -132,6 +132,16 @@ namespace GameRes.Formats.KiriKiri
             throw new NotImplementedException ("TlgFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         byte[] ReadTlg (IBinaryStream src, TlgMetaData info)
         {
             src.Position = info.DataOffset;

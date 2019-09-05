@@ -36,6 +36,15 @@ namespace GameRes.Formats.Slg
         public override string Description { get { return "SLG system encrypted PNG image"; } }
         public override uint     Signature { get { return 0x7CF3C28B; } }
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {
@@ -71,6 +80,10 @@ namespace GameRes.Formats.Slg
         public override string Description { get { return "SLG system encrypted JPEG image"; } }
         public override uint     Signature { get { return 0x15A44A01; } }
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {

@@ -78,8 +78,10 @@ namespace GARbro.GUI
             {
                 destination = convert_dialog.DestinationDir.Text;
                 Directory.SetCurrentDirectory (destination);
-                var converter = new GarConvertMedia (this);
-                converter.IgnoreErrors = convert_dialog.IgnoreErrors.IsChecked ?? false;
+                var converter = new GarConvertMedia(this)
+                {
+                    IgnoreErrors = convert_dialog.IgnoreErrors.IsChecked ?? false
+                };
                 converter.Convert (source, format);
                 Settings.Default.appLastDestination = destination;
             }
@@ -87,22 +89,6 @@ namespace GARbro.GUI
             {
                 PopupError (X.Message, guiStrings.TextMediaConvertError);
             }
-        }
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-        static extern bool GetVolumeInformation (string rootName, string volumeName, uint volumeNameSize,
-                                                 IntPtr serialNumber, IntPtr maxComponentLength, 
-                                                 out uint flags, string fs, uint fs_size);
-
-        bool IsWritableDirectory (string path)
-        {
-            var root = Path.GetPathRoot (path);
-            if (null == root)
-                return false;
-            uint flags;
-            if (!GetVolumeInformation (root, null, 0, IntPtr.Zero, IntPtr.Zero, out flags, null, 0))
-                return false;
-            return (flags & 0x00080000) == 0; // FILE_READ_ONLY_VOLUME
         }
     }
 
@@ -115,7 +101,8 @@ namespace GARbro.GUI
         public bool IgnoreErrors { get; set; }
         public IEnumerable<Tuple<string,string>> FailedFiles { get { return m_failed; } }
 
-        public GarConvertMedia (MainWindow parent) : base (parent, guiStrings.TextMediaConvertError)
+        public GarConvertMedia(MainWindow parent)
+            : base (parent, guiStrings.TextMediaConvertError)
         {
         }
 

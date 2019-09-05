@@ -64,6 +64,16 @@ namespace GameRes.Formats.Tanuki
             throw new System.NotImplementedException ("AmapFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         byte[] LzssUnpack (IBinaryStream input)
         {
             int unpacked_size = input.ReadInt32();

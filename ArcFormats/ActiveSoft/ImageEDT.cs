@@ -107,6 +107,16 @@ namespace GameRes.Formats.AdPack
             throw new NotImplementedException ("EdtFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {
             var header = stream.ReadHeader (0x22);
@@ -268,6 +278,16 @@ namespace GameRes.Formats.AdPack
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("Ed8Format.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)

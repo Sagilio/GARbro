@@ -92,6 +92,15 @@ namespace GameRes.Formats.Mokopro
         public override string Description { get { return "Mokopro compressed bitmap"; } }
         public override uint     Signature { get { return 0x4E4E4E4E; } } // 'NNNN'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public NNNNBmpFormat ()
         {

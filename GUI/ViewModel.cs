@@ -212,6 +212,7 @@ namespace GARbro.GUI
         {
             Path = vm.Path;
             Item = null != item ? item.Name : null;
+            
         }
 
         public DirectoryPosition (string filename)

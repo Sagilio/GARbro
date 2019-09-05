@@ -39,6 +39,15 @@ namespace GameRes.Formats.Kaguya
         public override string Description { get { return "KaGuYa script engine image format"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public AoFormat ()
         {

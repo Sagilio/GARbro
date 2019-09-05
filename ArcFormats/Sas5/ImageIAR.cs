@@ -109,6 +109,16 @@ namespace GameRes.Formats.Sas5
             throw new System.NotImplementedException ("IarFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         static BitmapPalette ReadPalette (Stream input, int palette_size)
         {
             var palette_data = new byte[palette_size];

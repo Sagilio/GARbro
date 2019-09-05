@@ -551,4 +551,22 @@ Overwrite?</value>
   <data name="winDownScaleImage" xml:space="preserve">
     <value>Scale large images to fit window</value>
   </data>
+  <data name="TextExportMedia" xml:space="preserve">
+    <value>Media exportion</value>
+  </data>
+  <data name="CtxMenuExport" xml:space="preserve">
+    <value>Export media</value>
+  </data>
+  <data name="CtxMenuPack" xml:space="preserve">
+    <value>Pack media</value>
+  </data>
+  <data name="TextMediaExportion" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="TextMediaPack" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="TextPackMedia" xml:space="preserve">
+    <value>Media Pack</value>
+  </data>
 </root>

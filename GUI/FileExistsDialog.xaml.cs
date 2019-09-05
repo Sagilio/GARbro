@@ -17,7 +17,7 @@ namespace GARbro.GUI
             this.Notice.Text = text;
         }
 
-        new public FileExistsDialogResult ShowDialog ()
+        public new FileExistsDialogResult ShowDialog ()
         {
             bool dialog_result = base.ShowDialog() ?? false;
             if (!dialog_result)

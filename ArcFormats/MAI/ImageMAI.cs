@@ -58,6 +58,16 @@ namespace GameRes.Formats.MAI
             throw new NotImplementedException ("CmFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {
             if ('C' != stream.ReadByte() || 'M' != stream.ReadByte())
@@ -164,6 +174,16 @@ namespace GameRes.Formats.MAI
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("AmFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
@@ -300,6 +320,16 @@ namespace GameRes.Formats.MAI
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("MaskFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
 
         public override ImageMetaData ReadMetaData (IBinaryStream file)

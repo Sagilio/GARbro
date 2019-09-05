@@ -81,6 +81,16 @@ namespace GameRes.Formats.C4
         {
             throw new NotImplementedException ("GdFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -115,6 +125,16 @@ namespace GameRes.Formats.C4
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("XexGdFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
     }
 

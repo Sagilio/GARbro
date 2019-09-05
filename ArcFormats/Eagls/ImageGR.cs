@@ -44,6 +44,15 @@ namespace GameRes.Formats.Eagls
         public override string Description { get { return "EAGLS engine compressed bitmap"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream file)
         {

@@ -62,6 +62,16 @@ namespace GameRes.Formats.QSoft
             throw new System.NotImplementedException ("BpeFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         byte[] Decompress (IBinaryStream input, int unpacked_size)
         {
             var output = new byte[unpacked_size];

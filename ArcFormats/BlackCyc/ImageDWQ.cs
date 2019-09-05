@@ -224,6 +224,16 @@ namespace GameRes.Formats.BlackCyc
             throw new NotImplementedException ("DwqFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         private BitmapSource ApplyAlphaChannel (BitmapSource bitmap, byte[] alpha)
         {
             if (bitmap.Format.BitsPerPixel != 32)

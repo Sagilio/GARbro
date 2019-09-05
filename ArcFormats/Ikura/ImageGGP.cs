@@ -44,6 +44,15 @@ namespace GameRes.Formats.Ikura
         public override string Description { get { return "Digital Romance System encrypted image format"; } }
         public override uint     Signature { get { return 0x46504747u; } } // 'GGPF'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public GgpFormat ()
         {

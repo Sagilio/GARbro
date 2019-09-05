@@ -59,7 +59,7 @@ namespace GameRes
         /// Change entry type to the type of resource <paramref name="res"/>.
         /// Entry name extension is changed accordingly.
         /// </summary>
-        public void ChangeType (IResource res)
+        public void ChangeType (Resource res)
         {
             if (null == res)
                 return;
@@ -79,7 +79,7 @@ namespace GameRes
         public bool IsPacked     { get; set; }
     }
 
-    public abstract class IResource
+    public abstract class Resource
     {
         /// <summary>Short tag sticked to resource (usually filename extension)</summary>
         public abstract string Tag { get; }
@@ -95,7 +95,7 @@ namespace GameRes
         public abstract uint Signature { get; }
 
         /// <summary>Whether resource creation is supported by implementation.</summary>
-        public virtual bool CanWrite { get { return false; } }
+        public virtual bool CanWrite => false;
 
         /// <summary>Signatures peculiar to the resource (the one above is also included here).</summary>
         public IEnumerable<uint> Signatures { get; protected set; }
@@ -109,7 +109,7 @@ namespace GameRes
         /// <summary>Resource access scheme suitable for serialization.</summary>
         public virtual ResourceScheme Scheme { get; set; }
 
-        protected IResource ()
+        protected Resource ()
         {
             Extensions = new string[] { GetDefaultExtension() };
             Signatures = new uint[] { this.Signature };

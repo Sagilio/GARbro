@@ -88,6 +88,16 @@ namespace GameRes.Formats.Tail
         {
             throw new System.NotImplementedException ("CfpFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     internal class CfpMetaData : ImageMetaData
@@ -155,6 +165,16 @@ namespace GameRes.Formats.Tail
         public override void Write (Stream file, ImageData image)
         {
             throw new System.NotImplementedException ("Cfp2Format.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

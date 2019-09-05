@@ -79,6 +79,16 @@ namespace GameRes.Formats.FrontWing
         {
             throw new System.NotImplementedException ("FwgiFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -140,6 +150,16 @@ namespace GameRes.Formats.FrontWing
         public override void Write (Stream file, ImageData image)
         {
             throw new System.NotImplementedException ("FweiFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

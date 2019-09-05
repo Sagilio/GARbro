@@ -163,7 +163,7 @@ namespace GameRes
         #endregion
     }
 
-    public abstract class AudioFormat : IResource
+    public abstract class AudioFormat : Resource
     {
         public override string Type { get { return "audio"; } }
 

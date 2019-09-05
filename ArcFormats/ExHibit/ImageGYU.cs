@@ -126,6 +126,16 @@ namespace GameRes.Formats.ExHibit
             throw new System.NotImplementedException ("GyuFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         private IDictionary QueryScheme ()
         {
             var options = Query<GyuOptions> (arcStrings.GYUImageEncrypted);

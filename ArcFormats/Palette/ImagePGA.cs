@@ -35,6 +35,15 @@ namespace GameRes.Formats.Palette
         public override string Description { get { return "Palette obfuscated PNG image"; } }
         public override uint     Signature { get { return 0x50414750; } } // 'PGAP'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {

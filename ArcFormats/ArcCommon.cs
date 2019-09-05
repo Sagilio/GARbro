@@ -33,7 +33,7 @@ namespace GameRes.Formats
 {
     public class AutoEntry : Entry
     {
-        private Lazy<IResource> m_res;
+        private Lazy<Resource> m_res;
         private Lazy<string> m_name;
         private Lazy<string> m_type;
 
@@ -48,9 +48,9 @@ namespace GameRes.Formats
             set { m_type = new Lazy<string> (() => value); }
         }
 
-        public AutoEntry (string name, Func<IResource> type_checker)
+        public AutoEntry (string name, Func<Resource> type_checker)
         {
-            m_res  = new Lazy<IResource> (type_checker);
+            m_res  = new Lazy<Resource> (type_checker);
             m_name = new Lazy<string> (() => GetName (name));
             m_type = new Lazy<string> (GetEntryType);
         }
@@ -60,7 +60,7 @@ namespace GameRes.Formats
             return new AutoEntry (base_name, () => DetectFileType (file.View.ReadUInt32 (offset))) { Offset = offset };
         }
 
-        public static IResource DetectFileType (uint signature)
+        public static Resource DetectFileType (uint signature)
         {
             if (0 == signature) return null;
             // resolve some special cases first

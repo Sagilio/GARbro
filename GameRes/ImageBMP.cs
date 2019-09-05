@@ -54,6 +54,16 @@ namespace GameRes
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return true; } }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public BmpFormat ()
         {
             Settings = new[] { EnableExtensions };
@@ -72,8 +82,7 @@ namespace GameRes
 
         public override ImageData Read (IBinaryStream file, ImageMetaData info)
         {
-            var bmp_info = info as BmpMetaData;
-            if (bmp_info != null && EnableExtensions.Get<bool>() && file.AsStream.CanSeek)
+            if (info is BmpMetaData bmp_info && EnableExtensions.Get<bool>() && file.AsStream.CanSeek)
             {
                 foreach (var ext in m_extensions)
                 {
@@ -208,7 +217,7 @@ namespace GameRes
             return ImageData.Create (info, PixelFormats.Bgra32, null, pixels, dst_stride);
         }
 
-        private ImageData ReadBitmapBGRA (IBinaryStream file, BmpMetaData info)
+        private ImageData ReadBitmapBGRA (IBinaryStream file, BmpMetaData info) 
         {
             file.Position = info.ImageOffset;
             int stride = (int)info.Width * 4;

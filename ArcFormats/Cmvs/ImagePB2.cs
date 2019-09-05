@@ -80,6 +80,16 @@ namespace GameRes.Formats.Purple
         {
             throw new System.NotImplementedException ("Pb2Format.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal sealed class Pb2Reader : PbReaderBase

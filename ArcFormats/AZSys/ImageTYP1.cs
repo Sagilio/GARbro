@@ -86,6 +86,16 @@ namespace GameRes.Formats.AZSys
             throw new System.NotImplementedException ("Typ1Format.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         internal class Reader
         {
             int             m_width;

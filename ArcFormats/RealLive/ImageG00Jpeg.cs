@@ -67,6 +67,16 @@ namespace GameRes.Formats.RealLive
             throw new System.NotImplementedException ("G00JpegFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         static readonly byte[] DefaultKey = {
             0x45, 0x0C, 0x85, 0xC0, 0x75, 0x14, 0xE5, 0x5D, 0x8B, 0x55, 0xEC, 0xC0, 0x5B, 0x8B, 0xC3, 0x8B,
             0x81, 0xFF, 0x00, 0x00, 0x04, 0x00, 0x85, 0xFF, 0x6A, 0x00, 0x76, 0xB0, 0x43, 0x00, 0x76, 0x49,

@@ -138,14 +138,23 @@ namespace GameRes
         }
     }
 
-    public abstract class ImageFormat : IResource
+    public abstract class ImageFormat : Resource
     {
         public override string Type { get { return "image"; } }
 
         public abstract ImageMetaData ReadMetaData (IBinaryStream file);
 
         public abstract ImageData Read (IBinaryStream file, ImageMetaData info);
+
         public abstract void Write (Stream file, ImageData bitmap);
+
+        public virtual bool CanExportAndPack => false;
+
+        public virtual bool NeedInputToPack => false;
+
+        public abstract ImageData ReadAndExport (IBinaryStream file,ImageMetaData info, Stream exportFile);
+
+        public abstract void Pack (Stream file, IBinaryStream inputFile, ImageData bitmap);
 
         public static ImageData Read (IBinaryStream file)
         {
@@ -156,7 +165,7 @@ namespace GameRes
             return format.Item1.Read (file, format.Item2);
         }
 
-        public static System.Tuple<ImageFormat, ImageMetaData> FindFormat (IBinaryStream file)
+        public static Tuple<ImageFormat, ImageMetaData> FindFormat (IBinaryStream file)
         {
             foreach (var impl in FormatCatalog.Instance.FindFormats<ImageFormat> (file.Name, file.Signature))
             {
@@ -175,6 +184,37 @@ namespace GameRes
                     throw;
                 }
                 catch { }
+            }
+            return null;
+        }
+
+        public static Tuple<ImageFormat, ImageMetaData> FindFormat (IBinaryStream file , Func<ImageFormat,bool> predicate)
+        {
+            foreach (var impl in FormatCatalog.Instance.FindFormats<ImageFormat> (file.Name, file.Signature))
+            {
+                try
+                {
+                    if (!predicate(impl))
+                    {
+                        continue;
+                    }
+
+                    file.Position = 0;
+                    var metadata = impl.ReadMetaData (file);
+
+                    if (null == metadata) continue;
+
+                    metadata.FileName = file.Name;
+                    return Tuple.Create (impl, metadata);
+                }
+                catch (OperationCanceledException)
+                {
+                    throw;
+                }
+                catch
+                {
+                    // ignored
+                }
             }
             return null;
         }
@@ -241,4 +281,5 @@ namespace GameRes
                 return ReadPalette (input, colors, format);
         }
     }
+
 }

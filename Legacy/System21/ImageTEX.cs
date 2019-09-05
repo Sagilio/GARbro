@@ -36,6 +36,15 @@ namespace GameRes.Formats.System21
         public override string Description { get { return "System21 compressed texture format"; } }
         public override uint     Signature { get { return 0x44445A53; } } // 'SZDD'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         static readonly ResourceInstance<ImageFormat> DdsFormat = new ResourceInstance<ImageFormat> ("DDS");
 

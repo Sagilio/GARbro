@@ -94,6 +94,16 @@ namespace GameRes.Formats.Cherry
         {
             throw new NotImplementedException ("GrpFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -129,6 +139,11 @@ namespace GameRes.Formats.Cherry
                 AlphaChannel = header.ToInt32 (0x24) != 0,
             };
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -159,6 +174,11 @@ namespace GameRes.Formats.Cherry
             if (info != null)
                 info.IsEncrypted = true;
             return info;
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
         }
     }
 

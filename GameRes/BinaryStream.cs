@@ -426,6 +426,7 @@ namespace GameRes
 
         public override void Write (byte[] buffer, int offset, int count)
         {
+            
             throw new NotSupportedException ("BinaryStream.Write method is not supported");
         }
 

@@ -67,6 +67,16 @@ namespace GameRes.Formats.Megu
             throw new System.NotImplementedException ("AlpFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
+
         byte[] Unpack (IBinaryStream input, uint unpacked_size)
         {
             var output = new byte[unpacked_size];

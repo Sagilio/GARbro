@@ -46,6 +46,15 @@ namespace GameRes.Formats.LiveMaker
         public override string Description { get { return "LiveMaker image format"; } }
         public override uint     Signature { get { return 0x656C6147; } } // 'Gale'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream file)
         {

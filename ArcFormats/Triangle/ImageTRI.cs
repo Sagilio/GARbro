@@ -83,6 +83,16 @@ namespace GameRes.Formats.Triangle
             throw new System.NotImplementedException ("TriFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         internal static void Unpack (IBinaryStream input, byte[] output)
         {
             int dst = 0;

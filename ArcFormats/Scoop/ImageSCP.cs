@@ -78,6 +78,16 @@ namespace GameRes.Formats.Scoop
             throw new System.NotImplementedException ("ScpFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void Unpack (IBinaryStream input, byte[] output)
         {
             uint bits = 0;

@@ -104,6 +104,16 @@ namespace GameRes.Formats.TopCat
             throw new System.NotImplementedException ("SpdFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         private ImageData ReadJpeg (Stream file, SpdMetaData info)
         {
             file.Position = 0x18;

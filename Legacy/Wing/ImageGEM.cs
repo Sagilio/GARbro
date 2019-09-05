@@ -81,6 +81,16 @@ namespace GameRes.Formats.Wing
         {
             throw new System.NotImplementedException ("GemFormat.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     internal class GemReader

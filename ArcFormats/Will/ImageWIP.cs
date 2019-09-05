@@ -86,6 +86,16 @@ namespace GameRes.Formats.Will
             throw new NotImplementedException ("WipFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ImageData Read (IBinaryStream file, ImageMetaData info)
         {
             var meta = (WipMetaData)info;

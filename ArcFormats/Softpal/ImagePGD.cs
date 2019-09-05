@@ -85,6 +85,16 @@ namespace GameRes.Formats.Softpal
         {
             throw new NotImplementedException ("Pgd11Format.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -134,6 +144,16 @@ namespace GameRes.Formats.Softpal
         {
             throw new NotImplementedException ("Pgd00Format.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -143,6 +163,10 @@ namespace GameRes.Formats.Softpal
         public override string Description { get { return "Image format used by Softpal subsidiaries"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
 
         public PgdTgaFormat ()
         {
@@ -227,6 +251,16 @@ namespace GameRes.Formats.Softpal
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("PgdGeFormat.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -320,6 +354,16 @@ namespace GameRes.Formats.Softpal
         public override void Write (Stream file, ImageData image)
         {
             throw new NotImplementedException ("Pgd3Format.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -375,7 +375,7 @@ namespace GameRes.Formats.Valkyria
                 else if (entry.Size > 4)
                 {
                     var signature = m_file.View.ReadUInt32 (entry.Offset);
-                    IResource res = null;
+                    Resource res = null;
                     if (0x5E6A6A42 == signature)
                         res = OggAudio.Instance;
                     else if (AudioFormat.Wav.Signature == signature)

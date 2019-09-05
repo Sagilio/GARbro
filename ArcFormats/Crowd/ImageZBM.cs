@@ -38,6 +38,15 @@ namespace GameRes.Formats.Crowd
         public override string Description { get { return "Crowd LZ-compressed bitmap"; } }
         public override uint     Signature { get { return 0x44445A53u; } } // 'SZDD'
         public override bool      CanWrite { get { return false; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {

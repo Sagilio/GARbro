@@ -51,6 +51,15 @@ namespace GameRes
         public override string Description { get { return "Truevision TGA image"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
 
         public override ImageData Read (IBinaryStream stream, ImageMetaData metadata)
         {

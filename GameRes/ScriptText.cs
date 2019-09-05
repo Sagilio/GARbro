@@ -26,7 +26,7 @@ namespace GameRes
 */
     }
 
-    public abstract class ScriptFormat : IResource
+    public abstract class ScriptFormat : Resource
     {
         public override string Type { get { return "script"; } }
 

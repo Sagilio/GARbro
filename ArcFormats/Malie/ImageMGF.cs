@@ -39,6 +39,16 @@ namespace GameRes.Formats.Malie
         public override uint     Signature { get { return 0x696C614D; } } // 'Mali'
         public override bool      CanWrite { get { return true; } }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ImageMetaData ReadMetaData (IBinaryStream stream)
         {
             var header = stream.ReadHeader (8).ToArray();

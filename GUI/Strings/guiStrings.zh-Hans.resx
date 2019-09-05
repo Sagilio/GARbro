@@ -560,4 +560,22 @@
   <data name="winDownScaleImage" xml:space="preserve">
     <value>缩放大图以适应窗口</value>
   </data>
+  <data name="TextExportMedia" xml:space="preserve">
+    <value>媒体导出</value>
+  </data>
+  <data name="CtxMenuExport" xml:space="preserve">
+    <value>导出多媒体文件...</value>
+  </data>
+  <data name="CtxMenuPack" xml:space="preserve">
+    <value>封装多媒体文件...</value>
+  </data>
+  <data name="TextMediaExportion" xml:space="preserve">
+    <value>导出时将可能创建 .ctl 格式文件以用来封装</value>
+  </data>
+  <data name="TextMediaPack" xml:space="preserve">
+    <value>封装时可能需要导出的 .ctl 格式文件</value>
+  </data>
+  <data name="TextPackMedia" xml:space="preserve">
+    <value>媒体封装</value>
+  </data>
 </root>

@@ -85,6 +85,16 @@ namespace GameRes.Formats.BlueGale
             throw new System.NotImplementedException ("ZbmFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         internal static void Unpack (Stream input, byte[] output, int dst = 0)
         {
             using (var bits = new MsbBitStream (input, true))

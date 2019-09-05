@@ -37,6 +37,6 @@
         </StackPanel>
     </StackPanel>
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:Commands.Browse}"       Executed="BrowseExec" CanExecute="CanExecuteAlways"/>
+        <CommandBinding Command="{x:Static local:Commands.Browse}" Executed="BrowseExec" CanExecute="CanExecuteAlways"/>
     </Window.CommandBindings>
 </Window>

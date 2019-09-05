@@ -76,6 +76,16 @@ namespace GameRes.Formats.Kurumi
             throw new System.NotImplementedException ("GraFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         void Decrypt (byte[] data)
         {
             int seed = 34567;

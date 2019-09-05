@@ -33,7 +33,7 @@ namespace GameRes
     /// <summary>
     /// Abstract base class for archive resource implementations.
     /// </summary>
-    public abstract class ArchiveFormat : IResource
+    public abstract class ArchiveFormat : Resource
     {
         public override string Type { get { return "archive"; } }
 

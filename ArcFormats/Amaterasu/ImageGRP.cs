@@ -39,6 +39,15 @@ namespace GameRes.Formats.Amaterasu
         public override string Description { get { return Strings.arcStrings.GRPDescription; } }
         public override uint     Signature { get { return 0x00505247; } } // 'GRP'
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override ImageMetaData ReadMetaData (IBinaryStream file)
         {

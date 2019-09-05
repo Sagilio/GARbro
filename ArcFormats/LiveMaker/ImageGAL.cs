@@ -166,6 +166,16 @@ namespace GameRes.Formats.LiveMaker
             throw new System.NotImplementedException ("GalFormat.Write not implemented");
         }
 
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ResourceOptions GetDefaultOptions ()
         {
             return new GalOptions { Key = KeyFromString (Properties.Settings.Default.GALKey) };

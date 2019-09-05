@@ -39,6 +39,15 @@ namespace GameRes.Formats.Kaguya
         public override string Description { get { return "KaGuYa script engine image format"; } }
         public override uint     Signature { get { return 0; } }
         public override bool      CanWrite { get { return true; } }
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public ApFormat ()
         {
@@ -150,6 +159,16 @@ namespace GameRes.Formats.Kaguya
         {
             throw new System.NotImplementedException ("Ap0Format.Write not implemented");
         }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     [Export(typeof(ImageFormat))]
@@ -190,6 +209,16 @@ namespace GameRes.Formats.Kaguya
         public override void Write (Stream file, ImageData image)
         {
             throw new System.NotImplementedException ("Ap2Format.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
         }
     }
 
@@ -237,6 +266,16 @@ namespace GameRes.Formats.Kaguya
         public override void Write (Stream file, ImageData image)
         {
             throw new System.NotImplementedException ("Ap3Format.Write not implemented");
+        }
+
+        public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pack(Stream file, IBinaryStream inputFile, ImageData bitmap)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
