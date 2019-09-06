@@ -51,14 +51,18 @@ namespace GameRes.Formats.Extension.Common
 
         public static byte[] GetBytes(this ImageData image, PixelFormat pixelFormat)
         {
+            var bitmap = image.Bitmap;
             int stride = (int)(image.Width * pixelFormat.BitsPerPixel / 8 + 3) & ~3;
 
-            var converted_bitmap = new FormatConvertedBitmap();
-            converted_bitmap.BeginInit();
-            converted_bitmap.Source = image.Bitmap;
-            converted_bitmap.DestinationFormat = pixelFormat;
-            converted_bitmap.EndInit();
-            var bitmap = converted_bitmap;
+            if (pixelFormat != bitmap.Format )
+            {
+                var converted_bitmap = new FormatConvertedBitmap();
+                converted_bitmap.BeginInit();
+                converted_bitmap.Source = image.Bitmap;
+                converted_bitmap.DestinationFormat = pixelFormat;
+                converted_bitmap.EndInit();
+                bitmap = converted_bitmap;
+            }
 
             var data = new byte[image.Height * stride];
             var row_data = new byte[stride];

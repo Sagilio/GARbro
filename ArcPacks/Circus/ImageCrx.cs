@@ -25,7 +25,7 @@ namespace GameRes.Formats.Extension.Circus
         private byte[] _header;
         private byte[] _headerAndCtl;
 
-        public override bool CanWrite => true;
+        public override bool CanWrite => false;
         public override bool CanExportAndPack => true;
         public override bool NeedInputToPack => true;
 
@@ -139,21 +139,13 @@ namespace GameRes.Formats.Extension.Circus
                 using (var binaryWriter = new BinaryWriter(memeStream))
                 {
                     binaryWriter.Write(Signature);
-                    binaryWriter.Seek(8, SeekOrigin.Begin);
-                    binaryWriter.Write((ushort)image.Width);
-                    binaryWriter.Seek(10, SeekOrigin.Begin);
-                    binaryWriter.Write((ushort)image.Height);
-                    binaryWriter.Seek(4, SeekOrigin.Begin);
                     binaryWriter.Write((ushort)image.OffsetX);
-                    binaryWriter.Seek(6, SeekOrigin.Begin);
                     binaryWriter.Write((ushort)image.OffsetY);
-                    binaryWriter.Seek(0x10, SeekOrigin.Begin);
-                    binaryWriter.Write(depth);
-                    binaryWriter.Seek(0xC, SeekOrigin.Begin);
+                    binaryWriter.Write((ushort)image.Width);
+                    binaryWriter.Write((ushort)image.Height);
                     binaryWriter.Write(compression);
-                    binaryWriter.Seek(0xE, SeekOrigin.Begin);
                     binaryWriter.Write(flags);
-                    binaryWriter.Seek(0x12, SeekOrigin.Begin);
+                    binaryWriter.Write(depth);
                     binaryWriter.Write(mode);
                 }
             }
@@ -172,7 +164,7 @@ namespace GameRes.Formats.Extension.Circus
             }
         }
 
-        public static PixelFormat CheckFormat(int bpp)
+        private static PixelFormat CheckFormat(int bpp)
         {
             switch (bpp)
             {
@@ -183,7 +175,7 @@ namespace GameRes.Formats.Extension.Circus
             }
         }
 
-        public class Reader : IDisposable
+        private class Reader : IDisposable
         {
             IBinaryStream m_input;
             BinaryWriter m_header_writer;
@@ -452,7 +444,7 @@ namespace GameRes.Formats.Extension.Circus
             #endregion
         }
 
-        public class Writer : IDisposable
+        private class Writer : IDisposable
         {
             IBinaryStream m_header_input;
             BinaryWriter m_output;
@@ -585,7 +577,7 @@ namespace GameRes.Formats.Extension.Circus
 
                 m_output.Flush();
 
-                using (var zlib = new ZLibStream(m_output.BaseStream, CompressionMode.Compress, true))
+                using (var zlib = new ZLibStream(m_output.BaseStream, CompressionMode.Compress, CompressionLevel.Level7,true))
                 using (var outPut = new BinaryWriter(zlib))
                 {
                     if (m_bpp >= 24)
