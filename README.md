@@ -21,7 +21,7 @@ Add feature packing some text and image format.
 
 | Engine | Format |               
 | :----------:  | :--------: |
-|  Cirtus V2     |`bmp` => `crx` |
+|  Cirtus V2     |`other image foramts` => `crx` |
 
 Operation
 ---------
