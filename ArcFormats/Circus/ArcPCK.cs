@@ -27,6 +27,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Documents;
+using ICSharpCode.SharpZipLib;
 
 namespace GameRes.Formats.Circus
 {
@@ -37,7 +41,7 @@ namespace GameRes.Formats.Circus
         public override string Description { get { return "Circus resource archive"; } }
         public override uint     Signature { get { return 0; } }
         public override bool  IsHierarchic { get { return true; } }
-        public override bool      CanWrite { get { return false; } }
+        public override bool      CanWrite { get { return true; } }
 
         public PckOpener ()
         {
@@ -73,6 +77,66 @@ namespace GameRes.Formats.Circus
                 index_offset += 0x40;
             }
             return new ArcFile (file, this, dir);
+        }
+
+        public override void Create(Stream file, IEnumerable<Entry> list, ResourceOptions options = null, EntryCallback callback = null)
+        {
+            var entries = list.ToArray();
+
+            var count = entries.Length;
+
+            if (!IsSaneCount(count))
+            {
+                throw new ValueOutOfRangeException("the count of entries is too long");
+            }
+
+            int index_offset = 4 + count * 8;
+            int index_size = 4 + count * 0x48;
+            var firstOffset = (index_size / 2048 + 1 ) * 2048;
+
+            uint nextOffset = 0;
+
+            using (var binaryWriter = new BinaryWriter(file))
+            {
+                binaryWriter.Write(count);
+
+                for (var index = 0; index < count; index++)
+                {
+                    var entry = entries[index];
+
+                    var indexAtHeaderPosition = 4 + index * 8;
+                    var indexAtMapPosition = index_offset + index * 0x40;
+
+                    uint offset;
+                    if (index == 0)
+                    {
+                        offset = (uint)firstOffset;
+                    }
+                    else
+                    {
+                        offset = nextOffset;
+                    }
+
+                    binaryWriter.Seek(indexAtHeaderPosition, SeekOrigin.Begin);
+                    binaryWriter.Write(offset);
+                    binaryWriter.Write(entry.Size);
+
+                    binaryWriter.Seek(indexAtMapPosition, SeekOrigin.Begin);
+                    binaryWriter.Write(entry.Name.ToCharArray());
+                    binaryWriter.Seek(indexAtMapPosition + 0x38, SeekOrigin.Begin);
+                    binaryWriter.Write(offset);
+                    binaryWriter.Write(entry.Size);
+
+                    binaryWriter.Seek((int)offset, SeekOrigin.Begin);
+                    var fileAllBytes = File.ReadAllBytes(entry.Name);
+                    binaryWriter.Write(fileAllBytes);
+
+                    nextOffset = offset + (entry.Size / 2048 + 1) * 2048;
+                }
+
+                binaryWriter.Seek((int) nextOffset - 4, SeekOrigin.Begin);
+                binaryWriter.Write(0);
+            }
         }
     }
 }

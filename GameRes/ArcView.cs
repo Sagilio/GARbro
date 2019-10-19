@@ -238,10 +238,10 @@ namespace GameRes
                 if (disposing)
                 {
                     View.Dispose();
-                    m_map.Dispose();
+                    //m_map.Dispose();
                 }
                 disposed = true;
-                m_map = null;
+                //m_map = null;
             }
         }
         #endregion

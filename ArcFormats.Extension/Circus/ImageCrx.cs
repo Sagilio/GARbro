@@ -31,7 +31,8 @@ namespace GameRes.Formats.Extension.Circus
 
         public override ImageData ReadAndExport(IBinaryStream file, ImageMetaData info, Stream exportFile)
         {
-            var imageData = Read(file,ReadMetaData(file));
+
+            var imageData = Read(file, ReadMetaData(file));
 
             using ( var binaryWriter = new BinaryWriter(exportFile))
             {
@@ -99,7 +100,7 @@ namespace GameRes.Formats.Extension.Circus
             {
                 using (var binaryWriter = new BinaryWriter(memoryStream))
                 {
-                    binaryWriter.Write(_header,0,_header.Length);
+                    binaryWriter.Write(_header, 0, _header.Length);
                     img = Read(stream, binaryWriter, info);
 
                     memoryStream.Seek(0, SeekOrigin.Begin);
@@ -244,28 +245,30 @@ namespace GameRes.Formats.Extension.Circus
                 Palette = new BitmapPalette(palette);
             }
 
-            public void Unpack(BinaryWriter outPut, bool is_diff = false)
+            public void Unpack(BinaryWriter output, bool is_diff = false)
             {
                 if (m_compression >= 3)
                 {
                     int count = m_input.ReadInt32();
 
-                    m_input.Seek(count * 0x10, SeekOrigin.Current);
+                    var check_bytes = m_input.ReadBytes(count * 0x10);
+                    //m_input.Seek(count * 0x10, SeekOrigin.Current);
 
-                    outPut.Write(count);
-                    outPut.Seek(count * 0x10, SeekOrigin.Current);
+                    output.Write(count);
+                    output.Write(check_bytes);
+                    //output.Seek(count * 0x10, SeekOrigin.Current);
                 }
                 if (0 != (m_flags & 0x10))
                 {
                     var compressed_size = m_input.ReadInt32(); // compressed_size
 
-                    outPut.Write(compressed_size);
+                    output.Write(compressed_size);
                 }
                 if (1 == m_compression)
 
                     UnpackV1();
                 else
-                    UnpackV2(outPut);
+                    UnpackV2(output);
 
                 if (32 == m_bpp && m_mode != 1)
                 {
@@ -362,7 +365,7 @@ namespace GameRes.Formats.Extension.Circus
                         {
                             byte ctl = src.ReadByte();
 
-                            outputHeader.Write(ctl);
+                            //outputHeader.Write(ctl);
 
                             int dst = y * m_stride;
                             int prev_row = dst - m_stride;
@@ -403,7 +406,7 @@ namespace GameRes.Formats.Extension.Circus
                                             {
                                                 byte count = src.ReadByte();
 
-                                                outputHeader.Write(count);
+                                                //outputHeader.Write(count);
 
                                                 for (int j = 0; j < count; ++j)
                                                 {
@@ -517,19 +520,19 @@ namespace GameRes.Formats.Extension.Circus
 
             public void Pack(bool isDiff = false)
             {
+                int compressed_size_position = 44;
                 if (m_compression >= 3)
                 {
                     int count = m_header_input.ReadInt32();
-                    m_header_input.Seek(count * 0x10, SeekOrigin.Current);
 
                     m_output.Write(count);
-                    m_output.Seek(count * 0x10, SeekOrigin.Current);
+                    m_output.Write(m_header_input.ReadBytes(count * 0x10));
 
                 }
                 if (0 != (m_flags & 0x10))
                 {
-                    var compressed_size = m_header_input.ReadInt32(); // compressed_size
-                    m_output.Write(compressed_size);
+                    compressed_size_position = (int)m_output.BaseStream.Position + 4;
+                    m_output.Seek(compressed_size_position, SeekOrigin.Begin);
                 }
 
                 if (32 == m_bpp && m_mode != 1)
@@ -562,7 +565,9 @@ namespace GameRes.Formats.Extension.Circus
                 else
                     PackV2();
 
-
+                m_output.Seek(compressed_size_position - 4, SeekOrigin.Begin);
+                var compressed_size = (int)m_output.BaseStream.Length; // compressed_size
+                m_output.Write(compressed_size);
             }
 
             private void PackV1()
@@ -575,57 +580,56 @@ namespace GameRes.Formats.Extension.Circus
                 int pixel_size = m_bpp / 8;
                 int src_stride = m_width * pixel_size;
 
-                m_output.Flush();
-
                 using (var zlib = new ZLibStream(m_output.BaseStream, CompressionMode.Compress, CompressionLevel.Level7,true))
-                using (var outPut = new BinaryWriter(zlib))
+                using (var output = new BinaryWriter(zlib))
                 {
                     if (m_bpp >= 24)
                     {
                         for (int y = 0; y < m_height; ++y)
                         {
-                            byte ctl = (byte)m_header_input.ReadByte();
+                            //byte ctl = (byte)m_header_input.ReadByte();
+                            byte ctl = 0;
 
-                            outPut.Write(ctl);
+                            output.Write(ctl);
 
                             int dst = y * m_stride;
                             int prev_row = dst - m_stride;
                             switch (ctl)
                             {
                                 case 0:
-                                    outPut.Write(m_input, dst, pixel_size);
+                                    output.Write(m_input, dst, pixel_size);
                                     for (int x = pixel_size; x < src_stride; ++x)
                                     {
-                                        outPut.Write((byte)(m_input[dst + x] - m_input[dst + x - pixel_size]));
+                                        output.Write((byte)(m_input[dst + x] - m_input[dst + x - pixel_size]));
                                     }
                                     break;
                                 case 1:
                                     for (int x = 0; x < src_stride; ++x)
                                     {
-                                        outPut.Write((byte)(m_input[dst + x] - m_input[prev_row + x]));
+                                        output.Write((byte)(m_input[dst + x] - m_input[prev_row + x]));
                                     }
                                     break;
                                 case 2:
-                                    outPut.Write(m_input, dst, pixel_size);
+                                    output.Write(m_input, dst, pixel_size);
 
                                     for (int x = pixel_size; x < src_stride; ++x)
                                     {
-                                        outPut.Write((byte)(m_input[dst + x] - m_input[prev_row + x - pixel_size]));
+                                        output.Write((byte)(m_input[dst + x] - m_input[prev_row + x - pixel_size]));
                                     }
                                     break;
                                 case 3:
                                     for (int x = src_stride - pixel_size; x > 0; --x)
                                     {
-                                        outPut.Write((byte)(m_input[dst++] - m_input[prev_row++ + pixel_size]));
+                                        output.Write((byte)(m_input[dst++] - m_input[prev_row++ + pixel_size]));
                                     }
-                                    outPut.Write(m_input, dst, pixel_size);
+                                    output.Write(m_input, dst, pixel_size);
                                     break;
                                 case 4:
                                     for (int i = 0; i < pixel_size; ++i)
                                     {
                                         int w = m_width;
                                         byte val = m_input[dst];
-                                        outPut.Write(val);
+                                        output.Write(val);
                                         while (w > 0)
                                         {
                                             dst += pixel_size;
@@ -633,13 +637,13 @@ namespace GameRes.Formats.Extension.Circus
                                                 break;
 
                                             byte next = m_input[dst];
-                                            outPut.Write(next);
+                                            output.Write(next);
 
                                             if (val == next)
                                             {
                                                 var count = (byte)m_header_input.ReadByte();
 
-                                                outPut.Write(count);
+                                                output.Write(count);
 
                                                 dst += pixel_size * count;
                                                 w -= count;
@@ -647,7 +651,7 @@ namespace GameRes.Formats.Extension.Circus
                                                 if (w > 0)
                                                 {
                                                     val = m_input[dst];
-                                                    outPut.Write(val);
+                                                    output.Write(val);
                                                 }
 
                                             }
@@ -686,8 +690,8 @@ namespace GameRes.Formats.Extension.Circus
                 {
                     var count = 1;
                     m_output.Write(count);
-                    m_output.Seek(count * 0x10, SeekOrigin.Current);
-
+                    m_output.Write(m_header_input.ReadBytes(count * 0x10));
+                    //m_output.Seek(count * 0x10, SeekOrigin.Current);
                 }
                 if (0 != (m_flags & 0x10))
                 {
@@ -737,7 +741,7 @@ namespace GameRes.Formats.Extension.Circus
                 m_output.Flush();
 
                 using (var zlib = new ZLibStream(m_output.BaseStream, CompressionMode.Compress, true))
-                using (var outPut = new BinaryWriter(zlib))
+                using (var output = new BinaryWriter(zlib))
                 {
 
                     if (m_bpp >= 24)
@@ -746,46 +750,46 @@ namespace GameRes.Formats.Extension.Circus
                         {
 
                             byte ctl = 0;
-                            outPut.Write(ctl);
+                            output.Write(ctl);
 
                             int dst = y * m_stride;
                             int prev_row = dst - m_stride;
                             switch (ctl)
                             {
                                 case 0:
-                                    outPut.Write(m_input, dst, pixel_size);
+                                    output.Write(m_input, dst, pixel_size);
                                     for (int x = pixel_size; x < src_stride; ++x)
                                     {
-                                        outPut.Write((byte)(m_input[dst + x] - m_input[dst + x - pixel_size]));
+                                        output.Write((byte)(m_input[dst + x] - m_input[dst + x - pixel_size]));
                                     }
                                     break;
                                 case 1:
                                     for (int x = 0; x < src_stride; ++x)
                                     {
-                                        outPut.Write((byte)(m_input[dst + x] - m_input[prev_row + x]));
+                                        output.Write((byte)(m_input[dst + x] - m_input[prev_row + x]));
                                     }
                                     break;
                                 case 2:
-                                    outPut.Write(m_input, dst, pixel_size);
+                                    output.Write(m_input, dst, pixel_size);
 
                                     for (int x = pixel_size; x < src_stride; ++x)
                                     {
-                                        outPut.Write((byte)(m_input[dst + x] - m_input[prev_row + x - pixel_size]));
+                                        output.Write((byte)(m_input[dst + x] - m_input[prev_row + x - pixel_size]));
                                     }
                                     break;
                                 case 3:
                                     for (int x = src_stride - pixel_size; x > 0; --x)
                                     {
-                                        outPut.Write((byte)(m_input[dst++] - m_input[prev_row++ + pixel_size]));
+                                        output.Write((byte)(m_input[dst++] - m_input[prev_row++ + pixel_size]));
                                     }
-                                    outPut.Write(m_input, dst, pixel_size);
+                                    output.Write(m_input, dst, pixel_size);
                                     break;
                                 case 4:
                                     for (int i = 0; i < pixel_size; ++i)
                                     {
                                         int w = m_width;
                                         byte val = m_input[dst];
-                                        outPut.Write(val);
+                                        output.Write(val);
                                         while (w > 0)
                                         {
                                             dst += pixel_size;
@@ -793,13 +797,13 @@ namespace GameRes.Formats.Extension.Circus
                                                 break;
 
                                             byte next = m_input[dst];
-                                            outPut.Write(next);
+                                            output.Write(next);
 
                                             if (val == next)
                                             {
                                                 var count = 255;
 
-                                                outPut.Write(count);
+                                                output.Write(count);
 
                                                 dst += pixel_size * count;
                                                 w -= count;
@@ -807,7 +811,7 @@ namespace GameRes.Formats.Extension.Circus
                                                 if (w > 0)
                                                 {
                                                     val = m_input[dst];
-                                                    outPut.Write(val);
+                                                    output.Write(val);
                                                 }
 
                                             }
